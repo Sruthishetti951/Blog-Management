@@ -1,0 +1,19 @@
+<%- include('./../layouts/header.ejs') -%>
+
+    <body>
+        <%- include('./../layouts/mainHeader.ejs') -%>
+            <%- include('./postlogin-nav.ejs') -%>
+                <main>
+                    <div class="min-height">
+                        <h4 class="mt-3">
+                            <%= message%>
+                        </h4>
+                        <div class="d-flex justify-content-center">
+                            <a class="btn btn-secondary" href="<%= backLink%>">Back</a>
+                        </div>
+                    </div>
+                    </div>
+                </main>
+
+                <%- include('./../layouts/footer.ejs') -%>
+    </body>

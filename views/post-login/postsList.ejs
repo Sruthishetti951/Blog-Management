@@ -1,0 +1,59 @@
+<%- include('./../layouts/header.ejs') -%>
+    <%- include('./../layouts/mainHeader.ejs') -%>
+        <nav class="navbar navbar-expand navbar-dark bg-dark">
+            <div class="container-fluid">
+                <div id="navbarSupportedContent" class="d-flex justify-content-end">
+                    <div>
+                        <a class="navbar-brand" href="/logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="mt-3"></div>
+        <main>
+            <div class="dasboard-main-content">
+
+                <% if(typeof(posts) !=='undefined' && posts.length > 0) {%>
+                    <nav class="navbar navbar-expand navbar-dark bg-dark">
+                        <div class="container-fluid">
+                            <div id="navbarSupportedContent" class="d-flex justify-content-start">
+                                <div>
+                                    <% for(let post of posts) {%>
+                                        <a class="navbar-brand text-capitalize" href="/users/<%= post.pageSlug%>">
+                                            <%= post.pageTitle%>
+                                        </a>
+                                        <%}%>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                    <%}%>
+                        <% if(typeof(selectedPost) !=='undefined' ) {%>
+                            <div class="card m-3">
+                                <div class="post-card">
+                                    <div>
+                                        <img src="/<%= selectedPost.heroImageURL%>" class="card-img-top" alt="..." height="150"
+                                            width="300">
+                                    </div>
+                                    <div class="card-body text-start">
+                                        <p class="card-title">
+                                            <strong>Post Title</strong>
+                                            <%= selectedPost.pageTitle%>
+                                        </p>
+                                        <div>
+                                            <div>
+                                                <strong>Post Content</strong>
+                                            </div>
+                                            <%- selectedPost.post%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%} else {%>
+                                <div class="d-flex justify-content-center">
+                                    <p>No Records found... Please Wait Until Admin adds some post</p>
+                                </div>
+                                <%}%>
+            </div>
+            <%- include('./../layouts/footer.ejs') -%>
+        </main>

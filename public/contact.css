@@ -1,0 +1,14 @@
+.form-div{
+   width: 500px; 
+   border: 1px solid black;
+   padding: 10px;
+}
+
+.form-margin-20{
+    margin: 20px;
+}
+.card-height{
+    min-height: 400px;
+    width: 600px;
+    text-align: center;
+}

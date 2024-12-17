@@ -1,0 +1,55 @@
+<%- include('./../layouts/header.ejs') -%>
+
+    <body>
+        <%- include('./../layouts/mainHeader.ejs') -%>
+            <%- include('./postlogin-nav.ejs') -%>
+                <main>
+                    <div class="min-height">
+                        <h4 class="mt-3">Edit Pages</h4>
+                        <%if(typeof(lists) !=='undefined' && lists.length> 0 ){ %>
+                            <div class="table-div mt-4 mb-4">
+                                <table>
+                                    <thead>
+                                        <th>Page</th>
+                                        <th>Image</th>
+                                        <th>Manage</th>
+                                        <th>Manage</th>
+                                    </thead>
+                                    <tbody>
+                                        <% for(let blog of lists) {%>
+                                            <tr>
+                                                <td>
+                                                    <%= blog.pageTitle%>
+                                                </td>
+                                                <td>
+                                                    <img src="/<%= blog.heroImageURL%>" height="50" width="50"/>
+                                                </td>
+                                                <td>
+                                                    <a href="/edit/<%= blog.pageSlug%>" class="btn btn-secondary">Edit</a>
+                                                </td>
+                                                <td>
+                                                    <a href="/delete/<%= blog._id %>"
+                                                        class="btn btn-secondary">Delete</a>
+                                                </td>
+                                            </tr>
+                                            <%}%>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <%} else {%>
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <h6>No Records Found</h6>
+                                        <div class="text-center">
+                                            <a href="/addPage" class="btn btn-secondary text-center">Create Blog</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%}%>
+                    </div>
+                    </div>
+                </main>
+
+                <%- include('./../layouts/footer.ejs') -%>
+                    <script src="/public/editPage.js" defer></script>
+    </body>

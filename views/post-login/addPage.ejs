@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Page</title>
+    <link href="/public/quill/quill.snow.css" rel="stylesheet">
+    <link href="/public/addPage.css" rel="stylesheet">
+    <script src="/public/quill/quill.js"></script>
+    <script src="./../../public/addPage.js" defer></script>
+
+</head>
+
+<body>
+    <%- include('./../layouts/header.ejs') -%>
+        <%- include('./../layouts/mainHeader.ejs') -%>
+            <%- include('./postlogin-nav.ejs') -%>
+                <main>
+                    <form method="post" novalidate name="addPageForm" onsubmit="return updateInputValue()"
+                        enctype="multipart/form-data">
+                        <div class="margin-container">
+                            <div class="error">
+                                <% if (typeof(errors) !=='undefined' ) { for (let error of errors) { %>
+                                    <p>
+                                        <%= error.msg %>
+                                    </p>
+                                    <% } %>
+                                        <% } %>
+
+                            </div>
+
+                            <h4 class="mt-3">
+                                <% if(typeof(blogPost) !=='undefined' && blogPost.heroImageURL !=='undefined' ){ %>
+                                    Update Post
+                                    <%} else {%>
+                                        Add Post:
+                                        <%}%>
+                            </h4>
+                            <div class="form-control d-flex justify-content-center mt-3">
+                                <label for="formUser">Page Title:</label>
+                                <input type="text" class="form-control" id="formUser" name="pageTitle"
+                                    value="<%= typeof(blogPost) !== 'undefined' ? blogPost.pageTitle : '' %>">
+                            </div>
+                            <div class="form-control d-flex justify-content-center mt-3">
+                                <label for="formUser">Page Slug:</label>
+                                <%if(typeof(blogPost) !=='undefined') {%>
+                                    <input readonly disabled type="text" class="form-control" id="pageSlug" name="pageSlug"
+                                        value="<%= typeof(blogPost) !== 'undefined' ? blogPost.pageSlug : '' %>">
+                                    <%} else {%>
+                                        <input type="text" class="form-control" id="pageSlug" name="pageSlug"
+                                            value="<%= typeof(blogPost) !== 'undefined' ? blogPost.pageSlug : '' %>">
+                                        <%}%>
+                            </div>
+                            <% if(typeof(blogPost) !=='undefined' ){ %>
+                                <img src="/<%= blogPost.heroImageURL%>" height="100" width="100"
+                                    class="border border-black" />
+                                <a href="/<%= blogPost.heroImageURL%>" class="btn btn-secondary" target="_blank">Preview
+                                    Image</a>
+                                <%}%>
+                                    <div class="form-control d-flex justify-content-between mt-3">
+                                        <label for="formUser">
+                                            <% if(typeof(blogPost) !=='undefined' && blogPost.heroImageURL
+                                                !=='undefined' ){ %>
+                                                Change Hero Image
+                                                <%} else {%>
+                                                    Hero Image:
+                                                    <%}%>
+                                        </label>
+                                        <input type="file" name="heroImage" accept="image/*" class="form-control"
+                                            id="formUser"
+                                            value="<%= typeof(blogPost) !== 'undefined' ? blogPost.heroImageFileName : '' %>">
+                                        <!-- <button type="button" onclick="heroImage.click()"
+                                    class="btn btn-secondary margin-left ms-3">Browse..</button> -->
+                                    </div>
+                                    <div class="mt-3">
+                                        <div id="editor" style="height: 200px" name="post">
+                                            <%- typeof(blogPost) !=='undefined' ? blogPost.post : '' %>
+                                        </div>
+                                        <input type="hidden" id="quillEditorInput" name="post"
+                                            value="<%= typeof(blogPost) !== 'undefined' ? blogPost.post : '' %>" />
+                                    </div>
+                                    <div class="mb-3 mt-3 ms-2">
+                                        <button type="submit" class="btn btn-secondary">Submit</button>
+                                    </div>
+                        </div>
+                    </form>
+
+                    <%- include('./../layouts/footer.ejs') -%>
+                </main>
+</body>
+
+</html>
